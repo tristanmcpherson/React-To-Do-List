@@ -1,32 +1,55 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(68, 115, 185);
+}
+
+.container-div {
+  width: 100%;
+  height: 100%;
+}
+
 .App {
+  font-family: "Permanent Marker", cursive;
   text-align: center;
+  background-color: #ebebeb;
+  width: 50%;
+  padding: 100px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 12px;
+  box-shadow: 2px 4px 60px 7px rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.form {
+  margin: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-control {
+  margin-bottom: 10px;
+}
+
+.list-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-start;
+  justify-content: space-evenly;
+  padding: 0px;
+  text-align: center;
+  list-style-type: none;
 }
 
-.App-link {
-  color: #61dafb;
+.list-item {
+  margin: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 768px) {
+  .App {
+    font-family: "Permanent Marker", cursive;
+    text-align: center;
+    width: 75%;
+    padding: 50px 35px;
+    margin: auto;
+    margin-top: 50px;
   }
 }
