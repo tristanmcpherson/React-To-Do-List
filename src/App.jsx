@@ -8,12 +8,15 @@ class App extends Component {
 
     this.state = {
       term: "",
-      items: []
+      items: [],
+      deletedItems: []
     };
   }
 
-  onChange = event => {
+  handleChange = event => {
+    event.preventDefault();
     this.setState({ term: event.target.value });
+    console.log(this.state);
   };
 
   onSubmit = event => {
@@ -27,13 +30,24 @@ class App extends Component {
       term: "",
       items: [...this.state.items, this.state.term]
     });
+
+    console.log(this.state);
   };
 
   deleteItems = index => {
     let newItems = [...this.state.items];
-    newItems.splice(index, 1);
+    let removedItems = newItems.splice(index, 1);
 
-    this.setState({ items: newItems });
+    let newDeletedItems = [...this.state.deletedItems];
+    newDeletedItems.push(removedItems);
+    let newDeletedItemsArr = newDeletedItems.flat();
+
+    this.setState({
+      items: newItems,
+      deletedItems: newDeletedItemsArr
+    });
+
+    console.log(this.state);
   };
 
   render() {
@@ -46,7 +60,7 @@ class App extends Component {
               <input
                 className="form-control"
                 value={this.state.term}
-                onChange={this.onChange}
+                onChange={this.handleChange}
               />
               <button className="btn btn-dark" onClick={this.onSubmit}>
                 Submit
