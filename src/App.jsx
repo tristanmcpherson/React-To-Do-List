@@ -15,8 +15,9 @@ class App extends Component {
 
   handleChange = event => {
     event.preventDefault();
-    this.setState({ term: event.target.value });
-    console.log(this.state);
+	  this.setState({ term: event.target.value }, () => {
+		  console.log(this.state);
+	  });
   };
 
   onSubmit = event => {
@@ -29,9 +30,10 @@ class App extends Component {
     this.setState({
       term: "",
       items: [...this.state.items, this.state.term]
-    });
+	}, () => {
+		console.log(this.state);
+	});
 
-    console.log(this.state);
   };
 
   deleteItems = index => {
@@ -45,9 +47,9 @@ class App extends Component {
     this.setState({
       items: newItems,
       deletedItems: newDeletedItemsArr
-    });
-
-    console.log(this.state);
+	}, () => {
+		console.log(this.state);
+	});
   };
 
   render() {
