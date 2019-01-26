@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import List from "./List.jsx";
 import "./App.css";
+import CheckedItems from "./CheckedItems";
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +15,10 @@ class App extends Component {
   }
 
   handleChange = event => {
-    this.setState({ term: event.target.value });
-    console.log(this.state);
+    event.preventDefault();
+    this.setState({ term: event.target.value }, () => {
+      console.log(this.state);
+    });
   };
 
   onSubmit = event => {
@@ -29,24 +32,31 @@ class App extends Component {
       term: "",
       items: [...this.state.items, this.state.term]
     });
-
-    console.log(this.state);
   };
 
   deleteItems = index => {
-    let newItems = [...this.state.items];
-    let removedItems = newItems.splice(index, 1);
+    let items = [...this.state.items];
+    let removedItems = items.splice(index, 1);
+
+    //adding items to the deletedItems array and flattening the array
 
     let newDeletedItems = [...this.state.deletedItems];
     newDeletedItems.push(removedItems);
     let newDeletedItemsArr = newDeletedItems.flat();
 
     this.setState({
-      items: newItems,
+      items: items,
       deletedItems: newDeletedItemsArr
     });
+  };
 
-    console.log(this.state);
+  deleteForGood = index => {
+    let deletedItems = [...this.state.deletedItems];
+    deletedItems.splice(index, 1);
+
+    this.setState({ deletedItems: deletedItems }, () =>
+      console.log(deletedItems)
+    );
   };
 
   render() {
@@ -67,6 +77,10 @@ class App extends Component {
             </div>
           </form>
           <List deleteItems={this.deleteItems} items={this.state.items} />
+          <CheckedItems
+            deleteForGood={this.deleteForGood}
+            checkedItems={this.state.deletedItems}
+          />
         </div>
       </div>
     );
