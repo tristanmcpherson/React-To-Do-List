@@ -14,7 +14,6 @@ class App extends Component {
   }
 
   handleChange = event => {
-    event.preventDefault();
     this.setState({ term: event.target.value });
     console.log(this.state);
   };
