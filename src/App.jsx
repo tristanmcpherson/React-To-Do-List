@@ -1,90 +1,65 @@
 import React, { Component } from "react";
-import List from "./List.jsx";
+import FullNote from "./FullNote";
 import "./App.css";
-import CheckedItems from "./CheckedItems";
+import propTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      term: "",
-      items: [],
-      deletedItems: []
+      notes: [],
+      id: 0
     };
   }
 
-  handleChange = event => {
-    event.preventDefault();
-    this.setState({ term: event.target.value }, () => {
-      console.log(this.state);
-    });
-  };
-
-  onSubmit = event => {
-    event.preventDefault();
-
-    if (this.state.term === "") {
-      return;
-    }
-
-    this.setState({
-      term: "",
-      items: [...this.state.items, this.state.term]
-    });
-  };
-
-  deleteItems = index => {
-    let items = [...this.state.items];
-    let removedItems = items.splice(index, 1);
-
-    //adding items to the deletedItems array and flattening the array
-
-    let newDeletedItems = [...this.state.deletedItems];
-    newDeletedItems.push(removedItems);
-    let newDeletedItemsArr = newDeletedItems.flat();
-
-    this.setState({
-      items: items,
-      deletedItems: newDeletedItemsArr
-    });
-  };
-
-  deleteForGood = index => {
-    let deletedItems = [...this.state.deletedItems];
-    deletedItems.splice(index, 1);
-
-    this.setState({ deletedItems: deletedItems }, () =>
-      console.log(deletedItems)
+  renderNote = () => {
+    let newNotes = [...this.state.notes];
+    newNotes.push(
+      <FullNote deleteNote={this.deleteNote} key={this.state.id} />
     );
+
+    this.setState(
+      prevState => {
+        return {
+          notes: newNotes,
+          id: prevState.id + 1
+        };
+      },
+      () => {
+        console.log(this.state.id);
+      }
+    );
+  };
+
+  deleteNote = index => {
+    let newNotes = [...this.state.notes];
+
+    newNotes.splice(index, 1);
+
+    this.setState({
+      notes: newNotes
+    });
   };
 
   render() {
     return (
-      <div className="container-div">
-        <div className="App">
-          <h1>What needs to be done?</h1>
-          <form className="form">
-            <div className="form-group">
-              <input
-                className="form-control"
-                value={this.state.term}
-                onChange={this.handleChange}
-              />
-              <button className="btn btn-dark" onClick={this.onSubmit}>
-                Submit
-              </button>
-            </div>
-          </form>
-          <List deleteItems={this.deleteItems} items={this.state.items} />
-          <CheckedItems
-            deleteForGood={this.deleteForGood}
-            checkedItems={this.state.deletedItems}
-          />
+      <div className="App-body">
+        <div className="header">
+          <button onClick={this.renderNote} className="btn btn-warning btn-sm">
+            New Note
+          </button>
+          <hr className="header-bottom-line" />
         </div>
+        <ul className="saved-notes">{this.state.notes}</ul>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  index: propTypes.number,
+  prevState: propTypes.number
+};
 
 export default App;
