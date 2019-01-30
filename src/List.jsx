@@ -4,13 +4,11 @@ const List = props => {
   return (
     <ul className="list-container">
       {props.items.map((item, index) => (
-        <div
-          onClick={() => props.deleteItems(index)}
-          className="list-item list-group-item list-group-item-action"
-          key={index}
-        >
-          <li className="li">{item}</li>
-          <hr />
+        <div onClick={() => props.deleteItems(index)} className="" key={index}>
+          <li className="list-item list-group-item list-group-item-action li">
+            {item}
+          </li>
+          <hr className="item-line" />
         </div>
       ))}
     </ul>

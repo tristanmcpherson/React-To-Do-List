@@ -12,8 +12,7 @@ class FullNote extends Component {
       term: "",
       items: [],
       deletedItems: [],
-      inputPlaceholder: "",
-      hovering: false
+      inputPlaceholder: ""
     };
   }
 
@@ -64,25 +63,10 @@ class FullNote extends Component {
     this.setState({ deletedItems: deletedItems });
   };
 
-  displayMenuButtons = () => {
-    this.setState({ hovering: !this.state.hovering });
-  };
-
-  deleteNote = () => {};
-
   render() {
-    const menuClasses =
-      this.state.hovering === true
-        ? "far fa-trash-alt trash-icon show"
-        : "far fa-trash-alt trash-icon";
-
     return (
       <div className="container-div">
-        <div
-          className="full-note"
-          onMouseEnter={this.displayMenuButtons}
-          onMouseLeave={this.displayMenuButtons}
-        >
+        <div className="full-note">
           <List deleteItems={this.deleteItems} items={this.state.items} />
           <form className="form">
             <div className="form-group">
@@ -111,7 +95,7 @@ class FullNote extends Component {
             <div />
           )}
 
-          <MenuButtons deleteNote={this.deleteNote} className={menuClasses} />
+          <MenuButtons deleteNote={this.props.deleteNote} />
         </div>
       </div>
     );

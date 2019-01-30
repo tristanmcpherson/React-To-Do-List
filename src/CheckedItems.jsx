@@ -3,19 +3,17 @@ import React from "react";
 const CheckedItems = props => {
   return (
     <div className="checked-items">
-      <p>
+      <p className="finished-text">
         <strong>Finished Tasks</strong>
       </p>
-      <hr />
+      <hr className="item-line" />
       <ul className="checked-items-list">
         {props.checkedItems.map((item, index) => (
-          <div
-            onClick={() => props.uncheck(index)}
-            className="checked-item list-item list-group-item list-group-item-action"
-            key={index}
-          >
-            <li className="li">{item}</li>
-            <hr />
+          <div onClick={() => props.uncheck(index)} className="" key={index}>
+            <li className="checked-item list-item list-group-item list-group-item-action li">
+              {item}
+            </li>
+            <hr className="item-line" />
           </div>
         ))}
       </ul>
