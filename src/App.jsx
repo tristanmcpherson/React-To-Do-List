@@ -15,7 +15,9 @@ class App extends Component {
 
   renderNote = index => {
     let newNotes = [...this.state.notes];
-    newNotes.push(<FullNote deleteNote={this.deleteNote} key={index} />);
+    newNotes.push(
+      <FullNote deleteNote={this.deleteNote} key={this.state.id} />
+    );
 
     this.setState(
       prevState => {
