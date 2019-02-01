@@ -1,6 +1,6 @@
 import React from "react";
 
-const CheckedItems = props => {
+const ArchivedItems = props => {
   return (
     <div className="checked-items">
       <p className="finished-text">
@@ -8,8 +8,8 @@ const CheckedItems = props => {
       </p>
       <hr className="item-line" />
       <ul className="checked-items-list">
-        {props.checkedItems.map((item, index) => (
-          <div onClick={() => props.uncheck(index)} className="" key={index}>
+        {props.archivedItems.map((item, index) => (
+          <div onClick={() => props.handleDeleteItem(index)} className="" key={index}>
             <li className="checked-item list-item list-group-item list-group-item-action li">
               {item}
             </li>
@@ -21,4 +21,4 @@ const CheckedItems = props => {
   );
 };
 
-export default CheckedItems;
+export default ArchivedItems;
